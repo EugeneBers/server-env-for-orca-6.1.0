@@ -1,0 +1,13 @@
+! B3LYP DEF2-TZVP DEF2-TZVP/C DEF2/J RIJCOSX TightSCF LargePrint SMD(acetonitrile)
+
+%pal nprocs 8 end
+
+%maxcore 7500
+
+%tddft
+   NROOTS 3
+   MaxIter 200
+   TDA False
+end
+
+* xyzFile 0 1 optA2.xyz *

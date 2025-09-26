@@ -167,5 +167,5 @@ mkdir -p $HOME/tmp
 export TMPDIR=$HOME/tmp && echo "SUCCESS! TMPDIR настроен. Можно проверить с помощью echo $TMPDIR - должно написать ~/tmp" || echo "FAILED! Не получилось настроить временную директорию"
 
 
-echo "ИТОГО: Настройка завершена. Необходимо проверить работу orca --version и mpiexec --version. Удачной работы!"
+echo "ИТОГО: Настройка завершена. Необходимо проверить работу orca --version и mpiexec --version. Если версии отображаться не будут, то нужно будет ввести source ~/.bashrc. Удачной работы!"
 
