@@ -14,4 +14,12 @@
 
 потом пишем
 
->>> git clone https://github.com/EugeneBers/server-env-for-orca-6.1.0.git
+>>> git clone https://github.com/EugeneBers/server-env-for-orca-6.1.0.git (Работает!)
+
+Заходим в папку
+
+>>> cd server-env-for-orca-6.1.0
+
+Потом запускаем start.sh
+
+>>> bash start.sh

@@ -12,16 +12,11 @@
 # -x экстрагировать (для разархивирования)
 # -f файл - что именно будем экстрагировать
 # tar - разархивировать
-
 #после запуска он попросит пароль от юзера
 #запускать нужно от chemuser
-
 echo "Запускаю обновление системы... Лог можно найти в about-installation-1.log"
-
 sudo apt update -y > about-installation-1.log 2>&1 && echo "SUCCESS! sudo apt update" || echo "FAILED! Не получился sudo apt update"
 sudo apt upgrade -y >> about-installation-1.log 2>&1 && echo "SUCCESS! sudo apt upgrade" || echo "FAILED! Не получился sudo apt upgrade"
-
-
 #создаем папки для софта
 
 echo "Создаю папки для софта... Лог можно найти в about-installation-2.log"
@@ -61,11 +56,11 @@ echo "Приступаю к настройке пути для ORCA..."
 ORCA_PATH="$HOME/software/orca"
 
 # Проверяем, существует ли папка ORCA
-if [ ! -d "$ORCA_PATH" ]; then
-    echo "❌ Ошибка: папка ORCA не найдена: $ORCA_PATH"
-    echo "Сначала распакуй ORCA в эту папку."
-    exit 1
-fi
+#if [ ! -d "$ORCA_PATH" ]; then
+#    echo " Ошибка: папка ORCA не найдена: $ORCA_PATH"
+#    echo "Сначала распакуй ORCA в эту папку."
+#    exit 1
+#fi
 
 # Файл конфигурации shell
 BASHRC="$HOME/.bashrc"
@@ -74,20 +69,23 @@ BASHRC="$HOME/.bashrc"
 PATH_LINE="export PATH=\"$ORCA_PATH:\$PATH\""
 LIB_LINE="export LD_LIBRARY_PATH=\"$ORCA_PATH:\$LD_LIBRARY_PATH\""
 
-# Проверяем, не добавлены ли уже эти строки (чтобы не дублировать)
-if ! grep -qF "$PATH_LINE" "$BASHRC"; then
-    echo "$PATH_LINE" >> "$BASHRC"
-    echo "Добавлено в PATH: $ORCA_PATH"
-else
-    echo "PATH уже настроен"
-fi
+echo "$PATH_LINE" >> "$BASHRC" 
+echo "$LIB_LINE" >> "$BASHRC"
 
-if ! grep -qF "$LIB_LINE" "$BASHRC"; then
-    echo "$LIB_LINE" >> "$BASHRC"
-    echo "Добавлено в LD_LIBRARY_PATH: $ORCA_PATH"
-else
-    echo "LD_LIBRARY_PATH уже настроен"
-fi
+# Проверяем, не добавлены ли уже эти строки (чтобы не дублировать)
+#if ! grep -qF "$PATH_LINE" "$BASHRC"; then
+#    echo "$PATH_LINE" >> "$BASHRC"
+#    echo "Добавлено в PATH: $ORCA_PATH"
+#else
+#    echo "PATH уже настроен"
+#fi
+
+#if ! grep -qF "$LIB_LINE" "$BASHRC"; then
+#    echo "$LIB_LINE" >> "$BASHRC"
+#    echo "Добавлено в LD_LIBRARY_PATH: $ORCA_PATH"
+#else
+#    echo "LD_LIBRARY_PATH уже настроен"
+#fi
 
 # Применяем изменения в текущей сессии
 source "$BASHRC"
@@ -122,40 +120,40 @@ MPI_PATH_BIN="$HOME/software/mpi/bin"
 MPI_PATH_LIB="$HOME/software/mpi/lib"
 
 # Проверяем, существует ли папка MPI BIN
-if [ ! -d "$MPI_PATH_BIN" ]; then
-    echo "❌ Ошибка: папка MPI не найдена: $MPI_PATH_BIN"
-    echo "Сначала распакуй MPI в эту папку."
-    exit 1
-fi
+#if [ ! -d "$MPI_PATH_BIN" ]; then
+#    echo " Ошибка: папка MPI не найдена: $MPI_PATH_BIN"
+#    echo "Сначала распакуй MPI в эту папку."
+#    exit 1
+#fi
 
 # Проверяем, существует ли папка MPI LIB
-if [ ! -d "$MPI_PATH_LIB" ]; then
-    echo "❌ Ошибка: папка MPI не найдена: $MPI_PATH_LIB"
-    echo "Сначала распакуй MPI в эту папку."
-    exit 1
-fi
-
-# Файл конфигурации shell
-BASHRC="$HOME/.bashrc"
+#if [ ! -d "$MPI_PATH_LIB" ]; then
+#    echo "Ошибка: папка MPI не найдена: $MPI_PATH_LIB"
+#    echo "Сначала распакуй MPI в эту папку."
+#    exit 1
+#fi
 
 # Строки, которые нужно добавить
-PATH_LINE="export PATH=\"$MPI_PATH_BIN:\$PATH\""
-LIB_LINE="export LD_LIBRARY_PATH=\"$MPI_PATH_LIB:\$LD_LIBRARY_PATH\""
+PATH_LINE_MPI="export PATH=\"$MPI_PATH_BIN:\$PATH\""
+LIB_LINE_MPI="export LD_LIBRARY_PATH=\"$MPI_PATH_LIB:\$LD_LIBRARY_PATH\""
+
+echo "$PATH_LINE_MPI" >> "$BASHRC"
+echo "$LIB_LINE_MPI" >> "$BASHRC"
 
 # Проверяем, не добавлены ли уже эти строки (чтобы не дублировать)
-if ! grep -qF "$PATH_LINE" "$BASHRC"; then
-    echo "$PATH_LINE" >> "$BASHRC"
-    echo "Добавлено в PATH: $MPI_PATH_BIN"
-else
-    echo "PATH_BIN уже настроен"
-fi
-
-if ! grep -qF "$LIB_LINE" "$BASHRC"; then
-    echo "$LIB_LINE" >> "$BASHRC"
-    echo "Добавлено в LD_LIBRARY_PATH: $MPI_PATH_LIB"
-else
-    echo "LD_LIBRARY_PATH уже настроен"
-fi
+#if ! grep -qF "$PATH_LINE" "$BASHRC"; then
+#    echo "$PATH_LINE" >> "$BASHRC"
+#    echo "Добавлено в PATH: $MPI_PATH_BIN"
+#else
+#    echo "PATH_BIN уже настроен"
+#fi
+#
+#if ! grep -qF "$LIB_LINE" "$BASHRC"; then
+#    echo "$LIB_LINE" >> "$BASHRC"
+#    echo "Добавлено в LD_LIBRARY_PATH: $MPI_PATH_LIB"
+#else
+#    echo "LD_LIBRARY_PATH уже настроен"
+#fi
 
 # Применяем изменения в текущей сессии
 source "$BASHRC"
